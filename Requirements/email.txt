@@ -1,0 +1,15 @@
+﻿Hi ​Haytham ,
+Hope you are doing well
+Thanks for your time, kindly find task details blow.
+
+
+Contact List UI Task 
+using angular.js and whatever css framework build app of two states contact list and add contact as describe in attachments
+
+Key Factors:
+Use Angular 1 in app
+CSS
+App Structure 
+Bug free
+Animation
+Thanks
