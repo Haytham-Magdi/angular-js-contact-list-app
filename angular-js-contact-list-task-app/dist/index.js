@@ -7,7 +7,8 @@ angular.module('myApp');
 app.controller('myCtrl', ['$scope', '$http',
     function ($scope, $http) {
   
-    $http({method: 'GET', url: 'contacts.json'}).
+    // $http({method: 'GET', url: 'contacts.json'}).
+    $http({method: 'GET', url: 'http://localhost:3300'}).
                     then(function(response) {
                         $scope.data = response.data;
                         // console.log("Read file", $scope.url, "successfully.");
