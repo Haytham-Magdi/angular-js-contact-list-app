@@ -15,20 +15,22 @@ var app = express()
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'))
-
-//   res.setHeader('Content-Type', 'application/json');
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
+app.get('/mod/*', function (req, res) {
+  var url2 = path.join(__dirname, req.url.replace('mod', 'node_modules'))
+  res.sendFile(url2)
+})
 
-// send all requests to index.html so browserHistory works
-// app.get('*', function (req, res) {
 app.get('/contacts', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'))
-
   res.setHeader('Content-Type', 'application/json');
-  res.sendFile(path.join(__dirname, 'dist', 'contacts.json'))
+  res.sendFile(path.join(__dirname, 'public', 'contacts.json'))
+})
+
+app.get('/recent-contact', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.sendFile(path.join(__dirname, 'public', 'recent-contact.json'))
 })
 
 var PORT = 3300
