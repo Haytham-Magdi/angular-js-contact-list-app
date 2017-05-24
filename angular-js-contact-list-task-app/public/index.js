@@ -9,10 +9,11 @@ angular.module('myApp')
     .controller('myCtrl', ['$scope', '$http',
         function ($scope, $http, mainUrl) {
     
-            // $http({method: 'GET', url: 'http://localhost:3300/contacts'}).
-            $http({method: 'GET', url: mainUrl + '/contacts'}).
+            $http({method: 'GET', url: 'http://localhost:3300/contacts'}).
+            // $http({method: 'GET', url: mainUrl + '/contacts'}).
                 then(function(response) {
-                    $scope.contacts = response.data.data;
+                    $scope.allContacts = response.data.data;
+                    $scope.contacts = $scope.allContacts;
                 }, function(response) {
                     // $scope.data = response.data || "Request failed";
                     $scope.errorMsg = "Error reading contacts.";

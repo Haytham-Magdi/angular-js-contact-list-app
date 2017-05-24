@@ -25,6 +25,23 @@
         {{usersCtrl.errorMsg}}
     </div>
 
+    <div class="section">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="srchEmail">Email:</label>
+                <div class="col-sm-7">
+                    <input id="srchEmail" class="form-control" type="text" ng-model="srchEmail">
+                </div>
+            </div>
+            <button class="btn btn-toolbar" ng-click="SearchUsers()">Search Contacts</button>
+        </form>
+    </div>
+
+    <div ng-repeat="contact in contacts">
+        {{contact.firstName}}
+    </div>
+
+
     <div class="alert alert-danger">
         {{contacts[0].firstName}}
     </div>
