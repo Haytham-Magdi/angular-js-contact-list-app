@@ -6,7 +6,7 @@
     <script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>  
+    <script type="text/javascript" src="lib/angular/angular.js"></script>
 
 <head>
 
@@ -37,17 +37,15 @@
         </form>
     </div>
 
-    <div ng-repeat="contact in contacts">
-        {{contact.firstName}}
-    </div>
+    <ul class="list-group">
+        <li class="list-group-item " ng-repeat="contact in contacts">
+            
+             <img class="card-img-top" src={{contact.image}} ng-show={{contact.image}} alt="Card image cap">
 
+            
+            {{contact.firstName}}</li>
+    </ul>
 
-    <div class="alert alert-danger">
-        {{contacts[0].firstName}}
-    </div>
-
-
-    <h1>{{contacts[0].firstName}}</h1>
 
 </body>
 </html>

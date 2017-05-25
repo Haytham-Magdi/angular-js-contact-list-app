@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/lib/*', function (req, res) {
-  var url2 = path.join(__dirname, req.url.replace('mod', 'node_modules'))
+  var url2 = path.join(__dirname, req.url.replace('lib', 'node_modules'))
   res.sendFile(url2)
 })
 
