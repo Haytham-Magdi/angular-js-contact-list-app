@@ -7,7 +7,7 @@
     <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.js"></script>
 
     <script type="text/javascript" src="lib/angular/angular.js"></script>
-
+    
 <head>
 
     <script>
@@ -21,30 +21,71 @@
 
 <body ng-app="myApp" ng-controller="myCtrl">
 
-    <div class="alert alert-danger" ng-show="usersCtrl.errorMsg">
-        {{usersCtrl.errorMsg}}
-    </div>
+    <div class='container-fluid' >
 
-    <div class="section">
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="srchEmail">Email:</label>
-                <div class="col-sm-7">
-                    <input id="srchEmail" class="form-control" type="text" ng-model="srchEmail">
+        <div class="alert alert-danger" ng-show="usersCtrl.errorMsg">
+            {{usersCtrl.errorMsg}}
+        </div>
+
+        <div class="section">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="srchFullName">Email:</label>
+                    <div class="col-sm-7">
+                        <input id="srchFullName" class="form-control" placeholder="Search Name" type="text" ng-model="srchFullName">
+                    </div>
                 </div>
+                <button class="btn btn-toolbar" ng-click="SearchUsers()">Search Contacts</button>
+            </form>
+        </div>
+
+        Latest Contacts
+
+        <div class="row">
+            <div class="col-sm-10">
+
+                <ul class="list-group">
+
+                    <li class="list-group-item " ng-repeat="contact in recentContacts">
+
+                        <div class="row-fluid clearfix">
+                            <div class="col-sm-4">
+                                <img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >
+                            </div>
+                            <div class="col-sm-4">
+                                <p>{{contact.firstName}}</p>
+                            </div>
+                            <div class="col-sm-4">
+                            
+                            </div>
+                        </div>            
+
+                    </li>
+
+                    <li class="list-group-item " ng-repeat="contact in contacts">
+
+                        <div class="row-fluid clearfix">
+                            <div class="col-sm-4">
+                                <img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >
+                            </div>
+                            <div class="col-sm-4">
+                                <p>{{contact.firstName}}</p>
+                            </div>
+                            <div class="col-sm-4">
+                            
+                            </div>
+                        </div>            
+
+                    </li>
+                </ul>
+
             </div>
-            <button class="btn btn-toolbar" ng-click="SearchUsers()">Search Contacts</button>
-        </form>
+            <div class="col-sm-2">
+                <input type="button" value="A" />
+            </div>
+        </div>
+
     </div>
-
-    <ul class="list-group">
-        <li class="list-group-item " ng-repeat="contact in contacts">
-            
-             <img class="card-img-top" src={{contact.image}} ng-show={{contact.image}} alt="Card image cap">
-
-            
-            {{contact.firstName}}</li>
-    </ul>
 
 
 </body>

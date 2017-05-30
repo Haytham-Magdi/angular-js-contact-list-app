@@ -21,7 +21,7 @@ angular.module('myApp')
 
             $http({method: 'GET', url: 'http://localhost:3300/recent-contact'}).
                 then(function(response) {
-                    $scope.recentContacts = response.data;
+                    $scope.recentContacts = response.data.data;
                 }, function(response) {
                     // $scope.data = response.data || "Request failed";
                     $scope.errorMsg = "Error reading recent contacts.";

@@ -28,4 +28,37 @@
 </div>
 
 
+<div class="row">
+  <div class="col-sm-4">.col-sm-4</div>
+  <div class="col-sm-4">.col-sm-4</div>
+  <div class="col-sm-4">.col-sm-4</div>
+</div>
+      
+            <div class="card">
+                <img class="card-img-top" src={{contact.image}} ng-show={{contact.image}} alt="Card image cap">
+                <div class="card-block">
+                    <p class="card-text">{{contact.firstName}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >
+                </div>
+                <div class="col-sm-4">
+                    <p>{{contact.firstName}}</p>
+                </div>
+                <div class="col-sm-4">
+                
+                </div>
+            </div>            
+
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+
 

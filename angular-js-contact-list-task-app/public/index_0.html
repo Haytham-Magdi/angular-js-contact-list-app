@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css" />
+
+    <script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="lib/angular/angular.js"></script>
+    
+<head>
+
+    <script>
+
+        var app = angular.module('myApp', []);
+
+    </script>
+    <script type="text/javascript" src="index.js"></script>
+
+</head>
+
+<body ng-app="myApp" class='container' ng-controller="myCtrl">
+
+    <div class="alert alert-danger" ng-show="usersCtrl.errorMsg">
+        {{usersCtrl.errorMsg}}
+    </div>
+
+    <div class="section">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="srchEmail">Email:</label>
+                <div class="col-sm-7">
+                    <input id="srchEmail" class="form-control" type="text" ng-model="srchEmail">
+                </div>
+            </div>
+            <button class="btn btn-toolbar" ng-click="SearchUsers()">Search Contacts</button>
+        </form>
+    </div>
+
+    Latest Contacts
+
+    <div class="row">
+        <div class="col-sm-10">
+
+            <ul class="list-group">
+
+                <li class="list-group-item " ng-repeat="contact in recentContacts">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >
+                        </div>
+                        <div class="col-sm-4">
+                            <p>{{contact.firstName}}</p>
+                        </div>
+                        <div class="col-sm-4">
+                        
+                        </div>
+                    </div>            
+
+                </li>
+
+                <li class="list-group-item " ng-repeat="contact in contacts">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >
+                        </div>
+                        <div class="col-sm-4">
+                            <p>{{contact.firstName}}</p>
+                        </div>
+                        <div class="col-sm-4">
+                        
+                        </div>
+                    </div>            
+
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-sm-2">
+            <input type="button" value="A" />
+        </div>
+    </div>
+
+
+</body>
+</html>
