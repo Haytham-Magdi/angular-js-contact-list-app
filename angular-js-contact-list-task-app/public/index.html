@@ -38,18 +38,19 @@
             </form>
         </div>
 
-        Latest Contacts
 
-        <div class="row">
-            <div class="col-sm-10">
 
                 <ul class="list-group">
+
+                    <li class="list-group-item ">
+                        <h2>Latest Contacts</h2>
+                    </li>
 
                     <li class="list-group-item " ng-repeat="contact in recentContacts">
 
                         <div class="row-fluid clearfix">
                             <div class="col-sm-4">
-                                <img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >
+                                <!--<img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >-->
                             </div>
                             <div class="col-sm-4">
                                 <p>{{contact.firstName}}</p>
@@ -61,11 +62,22 @@
 
                     </li>
 
+                </ul>
+
+        <div class="row">
+            <div class="col-sm-10">
+
+                <ul class="list-group">
+
+                    <li class="list-group-item ">
+                        <h2>Contacts</h2>
+                    </li>
+
                     <li class="list-group-item " ng-repeat="contact in contacts">
 
                         <div class="row-fluid clearfix">
                             <div class="col-sm-4">
-                                <img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >
+                                <!--<img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >-->
                             </div>
                             <div class="col-sm-4">
                                 <p>{{contact.firstName}}</p>

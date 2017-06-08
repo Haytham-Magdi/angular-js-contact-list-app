@@ -22,24 +22,6 @@ angular.module('myApp')
 
     .controller('myCtrl', ['$scope', '$http',
         function ($scope, $http, mainUrl) {
-    
-            $http({method: 'GET', url: 'http://localhost:3300/contacts'}).
-            // $http({method: 'GET', url: mainUrl + '/contacts'}).
-                then(function(response) {
-                    $scope.allContacts = response.data.data;
-                    $scope.contacts = $scope.allContacts.sort(function (a, b) { return b.firstName - a.firstName });
-                }, function(response) {
-                    // $scope.data = response.data || "Request failed";
-                    $scope.errorMsg = "Error reading contacts.";
-                });
-
-            $http({method: 'GET', url: 'http://localhost:3300/recent-contact'}).
-                then(function(response) {
-                    $scope.recentContacts = response.data.data;
-                }, function(response) {
-                    // $scope.data = response.data || "Request failed";
-                    $scope.errorMsg = "Error reading recent contacts.";
-                });
 
             var alphArr = [];
             for (var idx='A'.charCodeAt(0),end='Z'.charCodeAt(0); idx <=end; ++idx) {
@@ -48,6 +30,72 @@ angular.module('myApp')
             // alphArr.join();
             $scope.alphabetList = alphArr;
 
+
+            $http({method: 'GET', url: 'http://localhost:3300/contacts'}).
+            // $http({method: 'GET', url: mainUrl + '/contacts'}).
+                then(function(response) {
+                    $scope.allContacts = response.data.data;
+
+                    $scope.contactListItems = $scope.alphabetList
+                    // .filter(function (elm) {
+                    //     return elm.firstName && elm.lastName;
+                    // })
+                    .map(function (elm, i) {
+                        return {
+                            "type": 'a',
+                            "contact": elm,
+                            "dispName": elm.firstName + ' ' + elm.lastName,
+                        };
+                    })
+
+
+
+
+                    $scope.contactListItems = $scope.allContacts
+                    .filter(function (elm) {
+                        return elm.firstName && elm.lastName;
+                    })
+                    // .map(function (elm, i) {
+                    //     elm.firstName = elm.firstName || '';
+                    //     elm.lastName = elm.lastName || '';
+                    //     return elm;
+                    // })
+                    .map(function (elm, i) {
+                        return {
+                            "type": 'c',
+                            "contact": elm,
+                            "dispName": elm.firstName + ' ' + elm.lastName,
+                        };
+                    })
+                    .sort(function (a, b) { 
+                        var v1 = (b.dispName.toLowerCase() > a.dispName.toLowerCase()) ? -1 : 1;
+                        return v1;
+                    });
+                }, function(response) {
+                    // $scope.data = response.data || "Request failed";
+                    $scope.errorMsg = "Error reading contacts.";
+                });
+
+            $http({method: 'GET', url: 'http://localhost:3300/recent-contact'}).
+                then(function(response) {
+                    $scope.recentContacts = response.data.data
+                    .filter(function (elm) {
+                        return elm.firstName && elm.lastName;
+                    })
+                    // .map(function (elm, i) {
+                    //     elm.firstName = elm.firstName || '';
+                    //     elm.lastName = elm.lastName || '';
+                    //     return elm;
+                    // })
+                    .sort(function (a, b) { 
+                        // var v1 = ((b.firstName || ' ').toLowerCase() > (a.firstName || ' ').toLowerCase()) ? -1 : 1;
+                        var v1 = (b.firstName.toLowerCase() > a.firstName.toLowerCase()) ? -1 : 1;
+                        return v1;
+                    });
+                }, function(response) {
+                    // $scope.data = response.data || "Request failed";
+                    $scope.errorMsg = "Error reading recent contacts.";
+                });
 
         }]
 
