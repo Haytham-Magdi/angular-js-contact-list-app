@@ -73,14 +73,32 @@
                         <h2>Contacts</h2>
                     </li>
 
-                    <li class="list-group-item " ng-repeat="contact in contacts">
+                    <!--<li class="list-group-item " ng-repeat="contact in contacts">-->
+                    <li class="list-group-item " ng-repeat="item in contactListItems">
 
-                        <div class="row-fluid clearfix">
+                        <div class="row-fluid clearfix" ng-show="item.char">
+                        <!--<div class="row-fluid clearfix" ng-show="item.type === 'char'">-->
                             <div class="col-sm-4">
                                 <!--<img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >-->
                             </div>
                             <div class="col-sm-4">
-                                <p>{{contact.firstName}}</p>
+                                <label id="{{ ComposeCharListItemLabelId(item.char) }}"> {{item.char}} </label>
+                                <!--<label id={{item.char + "_lbl"}}> {{item.char}} </label>-->
+                                <!--<label id={{item.char}}> {{item.char}} </label>-->
+                                <!--<p>{{item.char}}</p>-->
+                            </div>
+                            <div class="col-sm-4">
+                            
+                            </div>
+                        </div>            
+
+                        <div class="row-fluid clearfix" ng-show="item.contact">
+                        <!--<div class="row-fluid clearfix" ng-show="item.type === 'contact'">-->
+                            <div class="col-sm-4">
+                                <!--<img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >-->
+                            </div>
+                            <div class="col-sm-4">
+                                <p>{{item.contact.firstName}}</p>
                             </div>
                             <div class="col-sm-4">
                             
@@ -93,7 +111,7 @@
             </div>
             <div class="col-sm-2" ng-repeat="ch in alphabetList">
                 <div class="row-fluid clearfix" >
-                    <input type="button" value={{ch}} />
+                    <input type="button" value={{ch}} ng-click="scrollToChar(ch)" />
                 </div>
             </div>
         </div>

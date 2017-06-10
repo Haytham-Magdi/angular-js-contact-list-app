@@ -20,8 +20,8 @@ angular.module('myApp')
     //     };
     // })
 
-    .controller('myCtrl', ['$scope', '$http',
-        function ($scope, $http, mainUrl) {
+    .controller('myCtrl', ['$anchorScroll', '$scope', '$http',
+        function ($anchorScroll, $scope, $http, mainUrl) {
 
             var alphArr = [];
             for (var idx='A'.charCodeAt(0),end='Z'.charCodeAt(0); idx <=end; ++idx) {
@@ -30,6 +30,13 @@ angular.module('myApp')
             // alphArr.join();
             $scope.alphabetList = alphArr;
 
+            $scope.ComposeCharListItemLabelId = function(ch) {
+                return 'lbl_' + ch;
+            } 
+
+            $scope.scrollToChar = function(ch) {
+                $anchorScroll($scope.ComposeCharListItemLabelId(ch));
+            } 
 
             $http({method: 'GET', url: 'http://localhost:3300/contacts'}).
             // $http({method: 'GET', url: mainUrl + '/contacts'}).
@@ -42,16 +49,17 @@ angular.module('myApp')
                     // })
                     .map(function (elm, i) {
                         return {
-                            "type": 'a',
-                            "contact": elm,
-                            "dispName": elm.firstName + ' ' + elm.lastName,
+                            // type: 'char',
+                            char: elm,
+                            dispName: elm,
                         };
                     })
 
 
 
 
-                    $scope.contactListItems = $scope.allContacts
+                    // $scope.contactListItems = $scope.allContacts
+                    $scope.contactListItems = $scope.contactListItems.concat($scope.allContacts
                     .filter(function (elm) {
                         return elm.firstName && elm.lastName;
                     })
@@ -62,11 +70,12 @@ angular.module('myApp')
                     // })
                     .map(function (elm, i) {
                         return {
-                            "type": 'c',
+                            // "type": 'contact',
                             "contact": elm,
                             "dispName": elm.firstName + ' ' + elm.lastName,
                         };
                     })
+                    )
                     .sort(function (a, b) { 
                         var v1 = (b.dispName.toLowerCase() > a.dispName.toLowerCase()) ? -1 : 1;
                         return v1;
