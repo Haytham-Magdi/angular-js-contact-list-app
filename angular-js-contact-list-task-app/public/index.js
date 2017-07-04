@@ -23,13 +23,6 @@ angular.module('myApp')
     .controller('myCtrl', ['$anchorScroll', '$scope', '$http',
         function ($anchorScroll, $scope, $http, mainUrl) {
 
-            var alphArr = [];
-            for (var idx='A'.charCodeAt(0),end='Z'.charCodeAt(0); idx <=end; ++idx) {
-                alphArr.push(String.fromCharCode(idx));
-            } 
-            // alphArr.join();
-            $scope.alphabetList = alphArr;
-
             $scope.ComposeCharListItemLabelId = function(ch) {
                 return 'lbl_' + ch;
             } 
@@ -41,49 +34,88 @@ angular.module('myApp')
             $http({method: 'GET', url: 'http://localhost:3300/contacts'}).
             // $http({method: 'GET', url: mainUrl + '/contacts'}).
                 then(function(response) {
-                    $scope.allContacts = response.data.data;
+                    $scope.fileContacts = response.data.data;
+    
+                    $scope.allContacts = $scope.fileContacts;
 
-                    $scope.contactListItems = $scope.alphabetList
-                    // .filter(function (elm) {
-                    //     return elm.firstName && elm.lastName;
-                    // })
-                    .map(function (elm, i) {
-                        return {
-                            // type: 'char',
-                            char: elm,
-                            dispName: elm,
-                        };
-                    })
+                    $scope.prepareFromAllContacts();
 
-
-
-
-                    // $scope.contactListItems = $scope.allContacts
-                    $scope.contactListItems = $scope.contactListItems.concat($scope.allContacts
-                    .filter(function (elm) {
-                        return elm.firstName && elm.lastName;
-                    })
-                    // .map(function (elm, i) {
-                    //     elm.firstName = elm.firstName || '';
-                    //     elm.lastName = elm.lastName || '';
-                    //     return elm;
-                    // })
-                    .map(function (elm, i) {
-                        return {
-                            // "type": 'contact',
-                            "contact": elm,
-                            "dispName": elm.firstName + ' ' + elm.lastName,
-                        };
-                    })
-                    )
-                    .sort(function (a, b) { 
-                        var v1 = (b.dispName.toLowerCase() > a.dispName.toLowerCase()) ? -1 : 1;
-                        return v1;
-                    });
                 }, function(response) {
                     // $scope.data = response.data || "Request failed";
                     $scope.errorMsg = "Error reading contacts.";
                 });
+
+
+            $scope.filterContacts = function(contacts) {
+                return contacts.filter(function (elm) {
+                    return elm.firstName && elm.lastName;
+                });
+            }
+
+            $scope.extractAlphabetsFromContacts = function(contacts) {
+                return contacts.map(function(elm, i){
+                    return elm.firstName.slice(0, 1).toUpperCase();
+                });
+            }
+
+            $scope.prepareFromAllContacts = function() {
+
+                var filteredContacts = $scope.filterContacts($scope.allContacts);
+
+                // var alphArr = [];
+                // for (var idx='A'.charCodeAt(0),end='Z'.charCodeAt(0); idx <=end; ++idx) {
+                //     alphArr.push(String.fromCharCode(idx));
+                // } 
+                // // alphArr.join();
+
+                // $scope.alphabetList = alphArr;
+
+                var alphabetList = $scope.extractAlphabetsFromContacts(filteredContacts);
+
+
+
+                $scope.contactListItems = alphabetList
+                // .filter(function (elm) {
+                //     return elm.firstName && elm.lastName;
+                // })
+                .map(function (elm, i) {
+                    return {
+                        // type: 'char',
+                        char: elm,
+                        dispName: elm,
+                    };
+                })
+
+
+
+
+                $scope.contactListItems = $scope.contactListItems.concat($scope.filteredContacts
+                // .filter(function (elm) {
+                //     return elm.firstName && elm.lastName;
+                // })
+                // .map(function (elm, i) {
+                //     elm.firstName = elm.firstName || '';
+                //     elm.lastName = elm.lastName || '';
+                //     return elm;
+                // })
+                .map(function (elm, i) {
+                    return {
+                        // "type": 'contact',
+                        "contact": elm,
+                        "dispName": elm.firstName + ' ' + elm.lastName,
+                    };
+                })
+                )
+                .sort(function (a, b) { 
+                    var v1 = (b.dispName.toLowerCase() > a.dispName.toLowerCase()) ? -1 : 1;
+                    return v1;
+                });
+
+
+            }
+
+
+
 
             $http({method: 'GET', url: 'http://localhost:3300/recent-contact'}).
                 then(function(response) {
