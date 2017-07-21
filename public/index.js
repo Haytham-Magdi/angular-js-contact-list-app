@@ -23,6 +23,10 @@ angular.module('myApp')
     .controller('myCtrl', ['$anchorScroll', '$scope', '$http',
         function ($anchorScroll, $scope, $http, mainUrl) {
 
+            $scope.newContact = {
+                firstName: 'hhh'
+            }
+
             $scope.ComposeCharListItemLabelId = function(ch) {
                 return 'lbl_' + ch;
             } 
