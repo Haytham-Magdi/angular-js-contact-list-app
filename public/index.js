@@ -53,14 +53,30 @@ angular.module('myApp')
             }
 
             $scope.extractAlphabetsFromContacts = function(contacts) {
+                var c1;
                 return contacts.map(function(elm, i){
-                    return elm.firstName.slice(0, 1).toUpperCase();
+                    return elm.firstName.slice(0, 1).toUpperCase()
+                })
+                .sort(function (a, b) { 
+                    var v1 = (b > a) ? -1 : 1;
+                    return v1;
+                })
+                .filter(function(elm){
+                    var ret;
+                    if(c1) {
+                        ret = elm !== c1;
+                    }
+                    else {
+                        ret = true;
+                    }
+                    c1 = elm;
+                    return ret;
                 });
             }
 
             $scope.prepareFromAllContacts = function() {
 
-                var filteredContacts = $scope.filterContacts($scope.allContacts);
+                $scope.filteredContacts = $scope.filterContacts($scope.allContacts);
 
                 // var alphArr = [];
                 // for (var idx='A'.charCodeAt(0),end='Z'.charCodeAt(0); idx <=end; ++idx) {
@@ -70,11 +86,11 @@ angular.module('myApp')
 
                 // $scope.alphabetList = alphArr;
 
-                var alphabetList = $scope.extractAlphabetsFromContacts(filteredContacts);
+                $scope.alphabetList = $scope.extractAlphabetsFromContacts($scope.filteredContacts);
 
 
 
-                $scope.contactListItems = alphabetList
+                $scope.contactListItems = $scope.alphabetList
                 // .filter(function (elm) {
                 //     return elm.firstName && elm.lastName;
                 // })
