@@ -38,38 +38,39 @@
             </form>
         </div>
 
-        <div class="section">
-            <form>
-            <div class="form-group">
-                <label for="firstName">Email address:</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Email address:</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox"> Remember me</label>
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-        </div>
-
-
-
 
                 <ul class="list-group">
 
                     <li class="list-group-item ">
                         <h2>Latest Contacts</h2>
+                    </li>
+
+                    <li>
+                        <div class="section">
+                            <h3>Add New Contact</h3>
+                            <form novalidate>
+                                <div class="form-group">
+                                    <label for="firstName">First Name:</label>
+                                    <input type="text" class="form-control" ng-model="newContact.firstName" ng-required="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="text" class="form-control" ng-model="newContact.lastName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address:</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" class="form-control" id="pwd">
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> Remember me</label>
+                                </div>
+                                <button type="button" class="btn btn-toolbar">Add</button>
+                            </form>
+                        </div>
                     </li>
 
                     <li class="list-group-item " ng-repeat="contact in recentContacts">
