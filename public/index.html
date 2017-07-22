@@ -59,16 +59,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email address:</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <input type="email" class="form-control" ng-model="newContact.email">
                                 </div>
-                                <div class="form-group">
-                                    <label for="pwd">Password:</label>
-                                    <input type="password" class="form-control" id="pwd">
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox"> Remember me</label>
-                                </div>
-                                <button type="button" class="btn btn-toolbar">Add</button>
+                                <button type="button" class="btn btn-toolbar" ng-click="addNewContact();">Add</button>
                             </form>
                         </div>
                     </li>
@@ -125,7 +118,17 @@
                                 <!--<img class="" src={{contact.image}} width='100' hight='75' ng-show={{contact.image}} >-->
                             </div>
                             <div class="col-sm-4">
-                                <p>{{item.contact.firstName}}</p>
+                                <p>{{item.contact.firstName + ' ' + item.contact.lastName}}</p>
+                                <p>{{item.contact.email}}
+
+                                <!--<p>{{item.contact[0]]}}-->
+                                <!--{{for (var attr in item.contact) {
+                                    item.contact[attr]
+                                }}}-->
+
+
+
+                                <p>{{item.contact}}
                             </div>
                             <div class="col-sm-4">
                             
