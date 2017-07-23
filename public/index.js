@@ -32,18 +32,27 @@ angular.module('myApp')
             } 
 
             $scope.addNewContact = function() {
-                $scope.allContacts.push($scope.clone($scope.newContact));
+                
+                // var new2 = {};
+                // angular.copy($scope.newContact, new2);
+                // $scope.allContacts.push(new2);
+                
+                // $scope.allContacts.push($scope.clone($scope.newContact));
+
+                $scope.allContacts.push($scope.newContact);
+                $scope.newContact = {};
+
                 $scope.prepareFromAllContacts();
             } 
 
-            $scope.clone = function (obj) {
-                if (null == obj || "object" != typeof obj) return obj;
-                var copy = obj.constructor();
-                for (var attr in obj) {
-                    if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-                }
-                return copy;
-            }
+            // $scope.clone = function (obj) {
+            //     if (null == obj || "object" != typeof obj) return obj;
+            //     var copy = obj.constructor();
+            //     for (var attr in obj) {
+            //         if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+            //     }
+            //     return copy;
+            // }
 
             $scope.scrollToChar = function(ch) {
                 $anchorScroll($scope.ComposeCharListItemLabelId(ch));
